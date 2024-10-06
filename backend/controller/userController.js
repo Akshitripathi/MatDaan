@@ -2,24 +2,26 @@ const User = require('../models/User');
 const twilio = require('twilio');
 const bcrypt = require('bcrypt');
 
-// Twilio setup
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
 
 
-const sendOtp = (mobile, otp) => {
-    return client.messages.create({
-        body: `Your OTP code is ${otp}`,
-        from: process.env.TWILIO_PHONE_NUMBER,
-        to: mobile
-    });
+const sendOtp = async (mobile, otp) => {
+    try {
+        const message = await client.messages.create({
+            body: `Your OTP code is ${otp}`,
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: mobile
+        });
+        console.log(`OTP sent: ${message.sid}`); 
+    } catch (error) {
+        console.error("Error sending OTP:", error.message); 
+    }
 };
 
-// Generate random OTP
 const generateOtp = () => Math.floor(100000 + Math.random() * 900000);
 
-// Signup controller
 exports.signup = async (req, res) => {
     const { name, mobile, aadhar, username, email, password, confirmPassword } = req.body;
 
@@ -44,7 +46,6 @@ exports.signup = async (req, res) => {
     }
 };
 
-// Login controller (OTP sent after entering username and mobile)
 exports.login = async (req, res) => {
     const { username, mobile, password } = req.body;
 
@@ -58,11 +59,9 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid password" });
         }
-
-        // Generate and send OTP
         const otp = generateOtp();
         user.otp = otp;
-        user.otpExpiry = Date.now() + 10 * 60 * 1000; // OTP valid for 10 minutes
+        user.otpExpiry = Date.now() + 10 * 60 * 1000; 
         await user.save();
 
         await sendOtp(mobile, otp);
@@ -72,7 +71,7 @@ exports.login = async (req, res) => {
     }
 };
 
-// OTP verification
+
 exports.verifyOtp = async (req, res) => {
     const { username, otp } = req.body;
 
@@ -86,7 +85,6 @@ exports.verifyOtp = async (req, res) => {
             return res.status(400).json({ message: "Invalid or expired OTP" });
         }
 
-        // Clear OTP after verification
         user.otp = undefined;
         user.otpExpiry = undefined;
         await user.save();
