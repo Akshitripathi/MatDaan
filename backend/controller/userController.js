@@ -1,11 +1,11 @@
 const User = require('../models/User');
 const twilio = require('twilio');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); // Import JWT
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
-
 
 const sendOtp = async (mobile, otp) => {
     try {
@@ -14,9 +14,9 @@ const sendOtp = async (mobile, otp) => {
             from: process.env.TWILIO_PHONE_NUMBER,
             to: mobile
         });
-        console.log(`OTP sent: ${message.sid}`); 
+        console.log(`OTP sent: ${message.sid}`);
     } catch (error) {
-        console.error("Error sending OTP:", error.message); 
+        console.error("Error sending OTP:", error.message);
     }
 };
 
@@ -46,6 +46,7 @@ exports.signup = async (req, res) => {
     }
 };
 
+
 exports.login = async (req, res) => {
     const { username, mobile, password } = req.body;
 
@@ -71,7 +72,6 @@ exports.login = async (req, res) => {
     }
 };
 
-
 exports.verifyOtp = async (req, res) => {
     const { username, otp } = req.body;
 
@@ -89,8 +89,12 @@ exports.verifyOtp = async (req, res) => {
         user.otpExpiry = undefined;
         await user.save();
 
-        res.status(200).json({ message: "OTP verified, login successful" });
+        // Generate JWT
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '3h' });
+
+        res.status(200).json({ message: "OTP verified, login successful", token });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
