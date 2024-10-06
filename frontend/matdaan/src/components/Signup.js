@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import Link for navigation
+import axios from 'axios'; // Import axios for API requests
 import './Signup.css'; 
 
 const Signup = () => {
@@ -13,6 +14,8 @@ const Signup = () => {
     confirmPassword: '',
   });
 
+  const navigate = useNavigate(); // Hook for navigation
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,10 +24,16 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    try {
+      const response = await axios.post('api/users/signup', formData);
+      console.log(response.data.message); // Display success message
+      navigate('/login'); // Redirect to login after successful signup
+    } catch (error) {
+      console.error(error);
+      alert("Signup failed: " + (error.response?.data?.message || "Please try again."));
+    }
   };
 
   return (
