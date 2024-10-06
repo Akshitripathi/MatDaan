@@ -1,17 +1,23 @@
 const Voter = require('../models/Voter');
 const Booth = require('../models/Booth');
+const jwt = require('jsonwebtoken');
 
-// Handle voter form submission
 exports.submitVoterForm = async (req, res) => {
-  const { voterId, state, city, pincode } = req.body;
+  const { state, city, pincode, age, gender } = req.body;
 
   try {
-    // Save voter details
+    // Verify the token and get the user ID
+    const token = req.headers.authorization.split(" ")[1]; // Assuming Bearer token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Create a new voter using the userId from the token
     const newVoter = new Voter({
-      voterId,
+      userId: decoded.id, // Use user ID from the token
       state,
       city,
-      pincode
+      pincode,
+      age,
+      gender
     });
 
     await newVoter.save();
@@ -33,6 +39,10 @@ exports.submitVoterForm = async (req, res) => {
     if (error.code === 11000) {
       // MongoDB duplicate key error for unique fields
       return res.status(400).json({ message: 'Voter ID has already been used. Please use a different voter ID.' });
+    } else if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ message: 'Invalid token. Please log in again.' });
+    } else if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Token has expired. Please log in again.' });
     }
 
     console.error(error);
