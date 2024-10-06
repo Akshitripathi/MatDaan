@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import axios for making HTTP requests
 import './VoterForm.css';
 
 const VoterForm = () => {
@@ -10,6 +11,7 @@ const VoterForm = () => {
     gender: '',
     age: '',
   });
+  const [responseMessage, setResponseMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,15 +21,26 @@ const VoterForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send formData to the backend)
-    console.log('Form Data Submitted:', formData);
+    try {
+      const token = localStorage.getItem('jwtToken'); // Retrieve JWT token from local storage
+      const response = await axios.post('/api/voter', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Attach token to the header
+        },
+      });
+      setResponseMessage(response.data.message); // Set the response message to display to the user
+    } catch (error) {
+      console.error('Error submitting voter form:', error);
+      setResponseMessage(error.response.data.message || 'Error submitting form');
+    }
   };
 
   return (
     <div>
       <h2>Voter Form</h2>
+      {responseMessage && <p className="response-message">{responseMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Voter ID:</label>
