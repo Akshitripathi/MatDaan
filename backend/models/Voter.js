@@ -2,34 +2,32 @@ const mongoose = require('mongoose');
 
 // Define the schema for Voter
 const VoterSchema = new mongoose.Schema({
-  voterId: {
-    type: String,
-    required: true,
-    unique: true  // Ensures that each voterId is unique
-  },
-  state: {
-    type: String,
-    required: true
-  },
-  city: {
-    type: String,
-    required: true
-  },
-  pincode: {
-    type: String,
-    required: true
-  },
-  age:{
-    type:Number,
-    required:true
-  },
-  gender:{
+    userId: {
+        type: mongoose.Schema.Types.ObjectId, // Reference to the User model
+        required: true,
+        ref: 'User' // Ensure it references the User model
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    pincode: {
+        type: String,
+        required: true
+    },
+    age: {
+        type: Number,
+        required: true
+    },
     gender: {
-      type: String,
-      enum: ['Male', 'Female', 'Others'],
-      required: true 
-  },
-  }
+        type: String,
+        enum: ['Male', 'Female', 'Others'],
+        required: true
+    }
 });
 
 // Export the model
