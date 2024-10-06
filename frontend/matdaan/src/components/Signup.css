@@ -1,0 +1,54 @@
+/* VoterForm.css */
+.form-container {
+    max-width: 400px;
+    width: 90%; /* Makes it responsive */
+    margin: 50px auto; /* Center the container */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f4f5d9; /* Light background for the form */
+    text-align: center; /* Center-align the header text */
+}
+
+.voter-form {
+    display: flex;
+    flex-direction: column; /* Stack form groups vertically */
+}
+
+.form-group {
+    display: flex;
+    justify-content: flex-start; /* Align label and input horizontally */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px; /* Space between inputs */
+}
+
+.voter-form label {
+    margin-right: 10px; /* Space between label and input */
+    color: #333; /* Text color */
+    flex: 1;
+}
+
+.voter-form input,
+.voter-form select {
+    padding: 8px;
+    border: 1px solid #ccc; /* Border around inputs */
+    border-radius: 4px;
+    flex: 2;
+    width: calc(100% - 16px); /* Full width input minus padding */
+}
+
+.voter-form button {
+    padding: 10px;
+    background-color: #4CAF50; /* Submit button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Full width button */
+}
+
+.voter-form button:hover {
+    background-color: #45a049; /* Hover color for button */
+}

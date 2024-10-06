@@ -1,0 +1,23 @@
+/* Navbar.css */
+nav {
+    display: flex;
+    justify-content: space-around; /* Distributes links evenly */
+    align-items: center; /* Centers items vertically */
+    background-color: #4CAF50; /* Green background */
+    padding: 10px; /* Padding around the navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  }
+  
+  nav a {
+    color: white; /* White text color */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 16px; /* Font size for links */
+    padding: 10px 15px; /* Padding around links */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  nav a:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  

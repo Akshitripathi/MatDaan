@@ -1,0 +1,110 @@
+.user-profile-container {
+    max-width: 550px; /* Set maximum width for the user profile */
+    margin: 40px auto; /* Center the container with auto margins */
+    padding: 20px; /* Padding inside the container */
+    background-color: #c7cea2; /* Light greenish background */
+    border-radius: 8px; /* Rounded corners for the container */
+    font-family: 'Arial', sans-serif; /* Font for the container */
+}
+
+h1 {
+    text-align: center; /* Center the header text */
+    color: #ff9933; /* Saffron color for the header */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+.profile-img-container {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    margin-bottom: 20px; /* Space below the image container */
+}
+
+.profile-img {
+    width: 150px; /* Set the width for the image */
+    height: 150px; /* Set the height to match the width for a circle */
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure the image covers the area */
+    border: 2px solid #ff9933; /* Optional: Add border color that matches your theme */
+}
+
+.field-group {
+    margin-bottom: 20px; /* Space below each field group */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack label and input vertically */
+}
+
+label {
+    margin-bottom: 5px; /* Space below the label */
+    font-size: 16px; /* Font size for labels */
+    color: #2a3b5a; /* Dark blue color for labels */
+}
+
+.input-container {
+    position: relative; /* Positioning for the icon */
+}
+
+input {
+    width: 100%; /* Full width for input fields */
+    padding: 12px; /* Padding inside the input fields */
+    border: 2px solid #4a9f4d; /* Green border for input fields */
+    border-radius: 4px; /* Rounded corners for input fields */
+    background-color: #f9f9f9; /* Light background for input fields */
+    font-size: 16px; /* Font size for input fields */
+    box-sizing: border-box; /* Prevents padding from causing overflow */
+    transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+input:focus {
+    border-color: #ff9933; /* Saffron color for focused state */
+    background-color: #eef2f7; /* Slight color change for focus */
+    outline: none; /* Remove outline on focus */
+}
+
+.edit-icon {
+    cursor: pointer; /* Pointer cursor for the icon */
+    font-size: 18px; /* Font size for the icon */
+    color: #ff9933; /* Saffron color for the icon */
+    position: absolute; /* Positioning for the icon */
+    right: 10px; /* Right alignment for the icon */
+    top: 50%; /* Center the icon vertically */
+    transform: translateY(-50%); /* Center the icon vertically */
+}
+
+.btn-submit {
+    display: block; /* Ensure button is block-level for full width */
+    width: 100%; /* Full width for the submit button */
+    background-color: #ff9933; /* Saffron color for the button */
+    color: #ffffff; /* White text for the button */
+    padding: 12px; /* Padding inside the button */
+    border: none; /* No border for the button */
+    border-radius: 4px; /* Rounded corners for the button */
+    font-size: 16px; /* Font size for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+.btn-submit:hover {
+    background-color: #e68a00; /* Darker saffron on hover */
+}
+
+@media (max-width: 768px) {
+    .user-profile-container {
+        max-width: 100%; /* Full width on smaller screens */
+        padding: 15px; /* Smaller padding on smaller screens */
+    }
+
+    h1 {
+        font-size: 24px; /* Smaller font size for header */
+    }
+
+    input {
+        padding: 10px; /* Smaller padding for inputs */
+        font-size: 14px; /* Smaller font size for inputs */
+    }
+
+    .btn-submit {
+        padding: 10px; /* Smaller padding for button */
+        font-size: 14px; /* Smaller font size for button */
+    }
+}

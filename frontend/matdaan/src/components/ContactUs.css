@@ -1,0 +1,86 @@
+.contact-us-container {
+  max-width: 600px; /* Set maximum width for the contact form */
+  margin: 40px auto; /* Center the container with auto margins */
+  padding: 30px; /* Padding inside the container */
+  background-color: #e9f5e9; /* Light greenish background */
+  border-radius: 10px; /* Rounded corners for the container */
+  font-family: 'Arial', sans-serif; /* Font for the container */
+}
+
+h1 {
+  text-align: center; /* Center the header text */
+  color: #ff9933; /* Saffron color for the header */
+  margin-bottom: 20px; /* Space below the header */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px; /* Space below each form group */
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+}
+
+label {
+  margin-bottom: 8px; /* Space below the label */
+  font-size: 16px; /* Font size for labels */
+  color: #2a3b5a; /* Dark blue color for labels */
+}
+
+input, textarea {
+  width: 100%; /* Full width for input and textarea */
+  padding: 12px; /* Padding inside the input fields */
+  border: 2px solid #4a9f4d; /* Green border for input fields */
+  border-radius: 4px; /* Rounded corners for input fields */
+  background-color: #f9f9f9; /* Light background for input fields */
+  font-size: 16px; /* Font size for input fields */
+  box-sizing: border-box; /* Prevents padding from causing overflow */
+  transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing of the textarea */
+  min-height: 150px; /* Minimum height for the textarea */
+}
+
+input:focus, textarea:focus {
+  border-color: #ff9933; /* Saffron color for focused state */
+  background-color: #eef2f7; /* Slight color change for focus */
+  outline: none; /* Remove outline on focus */
+}
+
+.submit-button {
+  width: 100%; /* Full width for the submit button */
+  background-color: #ff9933; /* Saffron color for the button */
+  color: #ffffff; /* White text for the button */
+  padding: 12px; /* Padding inside the button */
+  border: none; /* No border for the button */
+  border-radius: 4px; /* Rounded corners for the button */
+  font-size: 16px; /* Font size for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+.submit-button:hover {
+  background-color: #e68a00; /* Darker saffron on hover */
+}
+
+@media (max-width: 768px) {
+  .contact-us-container {
+      max-width: 100%; /* Full width on smaller screens */
+      padding: 20px; /* Smaller padding on smaller screens */
+  }
+
+  input, textarea {
+      padding: 10px; /* Smaller padding for inputs */
+      font-size: 14px; /* Smaller font size for inputs */
+  }
+
+  .submit-button {
+      padding: 10px; /* Smaller padding for button */
+      font-size: 14px; /* Smaller font size for button */
+  }
+}
