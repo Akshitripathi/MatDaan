@@ -7,6 +7,7 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
 
+
 const sendOtp = (mobile, otp) => {
     return client.messages.create({
         body: `Your OTP code is ${otp}`,
