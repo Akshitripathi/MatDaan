@@ -1,14 +1,14 @@
 const express = require('express');
 require('dotenv').config({ path: '.env' });
 const userRoutes = require('./routes/userRoutes');
-const connectDB = require('./middleware/db');  
+const connectDB = require('./middleware/db');
 
 
 const app = express();
 
 app.use(express.json());
 
-connectDB();  
+connectDB();
 
 app.use('/api/users', userRoutes);
 
