@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const url="mongodb+srv://akshi_tripathi:edX32AfB2olzUSSs@cluster0.4i0xhor.mongodb.net/product?retryWrites=true&w=majority&appName=Cluster0";
 
 // Function to connect to the database
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI, {
+        const conn = await mongoose.connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
